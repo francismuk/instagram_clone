@@ -62,3 +62,13 @@ class Category(models.Model):
     def __str__(self):
         return self.photo_category
     
+class Location(models.Model):
+    image_location = models.CharField(max_length=50)
+    
+    @classmethod
+    def get_all_locations(cls):
+        all_locations = Location.objects.all()
+        return all_locations
+    
+    def __str__(self):
+        return self.image_location
