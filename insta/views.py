@@ -6,4 +6,4 @@ import datetime as dt
 def index(request):
     title = 'Home'
 
-    return render(request,'index.html', {'title':title)
+    return render(request,'index.html', {'title':title})
