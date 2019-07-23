@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
+import datetime as dt
 # Create your models here.
 class Category(models.Model):
     photo_category = models.CharField(max_length=50)
@@ -23,11 +23,7 @@ class Category(models.Model):
     def __str__(self):
         return self.photo_category
     
-class tags(models.Model):
-    name = models.CharField(max_length =30)
 
-    def __str__(self):
-        return self.name
     
 class Location(models.Model):
     image_location = models.CharField(max_length=50)
@@ -42,14 +38,12 @@ class Location(models.Model):
 
 from tinymce.models import HTMLField
 class Image(models.Model):
-    image = models.ImageField(upload_to = 'image/')
+    image = models.ImageField(upload_to = 'image/',)
     name = models.CharField(max_length=60)
     post = HTMLField()
-    caption = models.TextField()
-    tags = models.ManyToManyField(tags)
     poster = models.ForeignKey(User,on_delete=models.CASCADE, blank=True, related_name="images")
-    location = models.ForeignKey(Location)
-    category = models.ForeignKey(Category)
+    location = models.ForeignKey(Location, blank=True)
+    category = models.ForeignKey(Category,blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
     
     def save_image(self):
