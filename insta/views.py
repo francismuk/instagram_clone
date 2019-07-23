@@ -8,6 +8,19 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
     title = 'Home'
+    images = Image.get_all_images()
+    if request.GET.get('location'):
+        images = Image.filter_by_location(request.GET.get('location'))
+
+    elif request.GET.get('tags'):
+        images = Image.filter_by_tag(request.GET.get('tags'))
+
+    # elif request.GET.get('search_term'):
+    #     images = Image.search_image(request.GET.get('search_term'))
+
+    else:
+        images = Image.objects.all()
+        
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
@@ -21,7 +34,7 @@ def index(request):
     else:
         form = SubscribeForm()
 
-    return render(request,'index.html', {'title':title, 'letterForm':form })
+    return render(request,'index.html', {'title':title, 'images':images, 'letterForm':form })
 
 
 @login_required(login_url='/accounts/login/')
@@ -37,4 +50,4 @@ def new_post(request):
 
     else:
         form = NewPostForm()
-    return render(request, 'new_post.html', {"form": form})
+    return render(request, 'registration/new_post.html', {"form": form})
