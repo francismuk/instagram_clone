@@ -4,6 +4,7 @@ import datetime as dt
 from .email import send_welcome_email
 from .forms import SubscribeForm
 from .models import Subscriber, Image, Location, Category
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
     title = 'Home'
