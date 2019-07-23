@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 import datetime as dt
-from django.core.urlresolvers import reverse
 from .email import send_welcome_email
 from .forms import SubscribeForm, NewPostForm
 from django.contrib.auth.models import User
