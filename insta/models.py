@@ -23,6 +23,12 @@ class Category(models.Model):
     def __str__(self):
         return self.photo_category
     
+class tags(models.Model):
+    name = models.CharField(max_length =30)
+
+    def __str__(self):
+        return self.name
+    
 class Location(models.Model):
     image_location = models.CharField(max_length=50)
     
@@ -40,6 +46,7 @@ class Image(models.Model):
     name = models.CharField(max_length=60)
     post = HTMLField()
     caption = models.TextField()
+    tags = models.ManyToManyField(tags)
     poster = models.ForeignKey(User,on_delete=models.CASCADE, blank=True, related_name="images")
     location = models.ForeignKey(Location)
     category = models.ForeignKey(Category)
