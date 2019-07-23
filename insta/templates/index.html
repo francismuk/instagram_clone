@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gallery</title>
+    {{ form.media }}
 </head>
 {% block content %}
 {{block.super}}
@@ -39,8 +40,9 @@
               <p style="font-family: 'Oswald', sans-serif;">Location : {{ image.location }}</p>
               <p style="font-family: 'Oswald', sans-serif;">Category : {{ image.category }}</p>
 
-            
-     <p style="font-family: 'Oswald', sans-serif;"> Caption : {{ image.post }}</p>
+              {% autoescape on %}
+     <p style="font-family: 'Oswald', sans-serif;"> Caption : {{ image.post | safe }}</p>
+     {% endautoescape %}
         </div>
       </div>
     </div>
