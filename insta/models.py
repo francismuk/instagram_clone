@@ -33,10 +33,12 @@ class Location(models.Model):
     
     def __str__(self):
         return self.image_location
-    
+
+from tinymce.models import HTMLField
 class Image(models.Model):
     image = models.ImageField(upload_to = 'image/')
     name = models.CharField(max_length=60)
+    post = HTMLField()
     caption = models.TextField()
     poster = models.ForeignKey(User,on_delete=models.CASCADE, blank=True, related_name="images")
     location = models.ForeignKey(Location)
