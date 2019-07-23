@@ -1,5 +1,13 @@
 from django import forms
+from .models import Image
 
 class SubscribeForm(forms.Form):
+    class Meta:
+        model = Image
+        exclude = ['poster', 'post_date']
+        widgets = {
+            'tags': forms.CheckboxSelectMultiple(),
+        }
+        
     name = forms.CharField(label='First Name', max_length=30)
     email = forms.EmailField(label = 'Email')
