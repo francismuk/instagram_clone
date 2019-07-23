@@ -11,4 +11,6 @@ class NewPostForm(forms.ModelForm):
         exclude = ['poster', 'post_date']
         widgets = {
             'tags': forms.CheckboxSelectMultiple(),
+            'location': forms.TextInput(),
+            'category': forms.TextInput(),
         }
