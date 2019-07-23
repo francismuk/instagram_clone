@@ -9,12 +9,11 @@ def index(request):
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['your_name']
+            name = form.cleaned_data['subscriber']
             email = form.cleaned_data['email']
-            recipient = Subscriber(name = name,email =email)
+
+            recipient = SubscribeForm(name = name,email =email)
             recipient.save()
-            HttpResponseRedirect('index')
-    else:
-        form = SubscribeForm()
+            send_welcome_email(name,email)
 
     return render(request,'index.html', {'title':title, 'letterForm':form, })
