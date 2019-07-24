@@ -6,9 +6,9 @@
   <meta charset="utf-8">
 
   {% if title %}
-  <title>Galgalo Gallery - {{title}}</title>
+  <title>Instagram - {{title}}</title>
   {% else %}
-    <title> Galgalo Gallery </title>
+    <title> Instagram </title>
   {% endif %}
   {{ form.media }}
   {% block styles %}
@@ -23,6 +23,12 @@
         {% include "navbar.html" %}
 
     {% block content %}
+    <div class="container">
+    <div class="jumbotron text-center mb-0" style="background-color:white;">  
+        <h1 class="h1" style="font-family: 'Satisfy', cursive;color: rgb(245, 39, 108);font-size:70px;">Instagram</h1>
+      </div>
+      <hr>
+    </div>
     
     {%endblock%}
 
