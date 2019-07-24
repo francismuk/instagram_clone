@@ -1,3 +1,5 @@
+{% load bootstrap3 %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,48 +14,65 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
+
+
+
       <div class="navbar-header">
-        <a class="navbar-brand" href="{% url 'index' %}"><img style="height:35px; width: 30px; padding-bottom: 15px"
-            src="media/image/INSTAGRAM.png" alt=""></a>
-        <a style="font-family: 'Satisfy', cursive;" class="navbar-brand" href="{% url 'index' %}"> Instagram </a>
-
+        <button style="border-color: magenta" class="navbar-toggle" type="button" data-toggle="collapse"
+          data-target=".navbar-collapse">
+          <span class="sr-only">Toggle Navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <ul>
+          <a class="navbar-brand" href="{% url 'index' %}"><img style="height:35px; width: 30px; padding-bottom: 15px"
+              src="media/image/INSTAGRAM.png" alt=""></a>
+          <a style="font-family: 'Satisfy', cursive;" class="navbar-brand" href="{% url 'index' %}"> Instagram </a>
+        </ul>
       </div>
-      <div class="col-md-8"></div>
-      <div class="col-md-3">
 
-        {% if user.is_authenticated %}
-        <p>
-          <p class="dropdown">
-            <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
-              aria-expanded="false">Account
-              <span class="caret"></span>
+
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="{%url 'new-post'%}">New Post<img style="height:20px; width:20px; padding-left: 4px;" src="media/image/round-add-button.png" alt=""></a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+              <form class="form-inline my-2 my-lg-0" style="padding-top: 7px" >
+                  <div class="input-group">
+                    <p>
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">@</button>
+                      <input class="form-control mr-sm-2" type="search" placeholder="Username" aria-label="Search">
+                    </p>
+                  </div>
+                </form>          
+              </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Account
             </a>
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a href="{%url 'index'%}">Home</a>
-              </li>
-              <li>
-                <a href="{%url 'new-post'%}">Create Article</a>
-              </li>
-              <li>
-                <a href="/accounts/password/change">Change Password</a>
-              </li>
-              <li>
-                <a href="/logout">Logout</a>
-              </li>
-            </ul>
-          </p>
-        </p>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <!-- <p><a class="dropdown-item" href="#">Action</a></p> -->
+              <p><a class="dropdown-item" href="/accounts/password/change">Change Password</a></p>
+              <div class="dropdown-divider"></div>
+              <p><a class="dropdown-item" href="/logout">Logout</a></p>
+            </div>
+          </li>
+          
+        </ul>
+        
         {% else %}
         <li>
-          <a class='btn btn-warning' href="/accounts/login">Login</a>
+          <a class='btn btn-danger' href="/accounts/login">Login</a>
         </li>
 
         {% endif %}
       </div>
-
     </div>
   </nav>
 </body>
