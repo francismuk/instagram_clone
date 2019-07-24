@@ -5,9 +5,11 @@ import datetime as dt
 # Create your models here.
 
 class Profile(models.Model):
+    class Meta:
+        db_table = 'profile'
     bio = models.TextField(max_length=200, null=True, blank=True, default="bio")
     profilepic = models.ImageField(upload_to='image/', null=True, blank=True)
-    user = models.OneToOneField(User, blank=True, related_name="profile")
+    user=models.OneToOneField(User, on_delete=models.CASCADE, blank=True, related_name="profile")
     followers = models.ManyToManyField(User, related_name="followers", blank=True)
     following = models.ManyToManyField(User, related_name="following", blank=True)
     
@@ -86,6 +88,7 @@ class Image(models.Model):
     location = models.ForeignKey(Location, blank=True)
     category = models.ForeignKey(Category,blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
+    comments= models.TextField(blank=True)
     
     def save_image(self):
         self.save()
@@ -121,7 +124,7 @@ class Image(models.Model):
     
 class Comments(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='user')
-    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name="review")
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name="images")
     comment = models.TextField()
 
     def save_comment(self):
