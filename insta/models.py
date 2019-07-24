@@ -3,6 +3,35 @@ from django.contrib.auth.models import User
 
 import datetime as dt
 # Create your models here.
+
+class Profile(models.Model):
+    bio = models.TextField(max_length=200, null=True, blank=True, default="bio")
+    profilepic = models.ImageField(upload_to='image/', null=True, blank=True)
+    user = models.OneToOneField(User, blank=True, related_name="profile")
+    followers = models.ManyToManyField(User, related_name="followers", blank=True)
+    following = models.ManyToManyField(User, related_name="following", blank=True)
+    
+    def save_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+        
+    def is_following(self, checkuser):
+        return checkuser in self.following.all()
+
+    def followers_number(self):
+        if self.followers.count():
+            return self.followers.count()
+        else:
+            return 0
+
+    def following_number(self):
+        if self.following.count():
+            return self.following.count()
+        else:
+            return 0
+
 class Category(models.Model):
     photo_category = models.CharField(max_length=50)
     
