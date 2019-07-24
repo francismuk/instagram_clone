@@ -19,35 +19,30 @@
   }
 </style>
 
-<div class="container">
 
-  <!-- <div class="jumbotron text-center mb-0" style="background-color:white;">
-      
-          <h1 class="h1" style="font-family: 'Satisfy', cursive;color: rgb(245, 39, 108);font-size:70px;">Instagram</h1>
-      
-        </div> -->
-</div>
 <div class="container">
     {% for image in images %}
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-5">
-           <div class="card border-secondary"><a href="{% url 'index' %}">
+          <p style="font-family: 'Oswald', sans-serif;"> <strong> Posted by : </strong> <a href="#"><strong>{{ image.poster}}</strong></a></p>
+          <p style="font-family: 'Oswald', sans-serif;">{{ image.location }}</p>
+
+           <div class="card border-secondary"><a href="{% url 'image' image.id %}">
             <img src="{{image.image.url}}" data-target="#imageModal{{image.id}}" data-toggle="modal" alt=""
               class="img-fluid" id="eachimage"></a>
-          <p style="font-family: 'Oswald', sans-serif;">Posted by : {{ image.poster }}</p>
-          <p style="font-family: 'Oswald', sans-serif;">Location : {{ image.location }}</p>
-          <p style="font-family: 'Oswald', sans-serif;">Category : {{ image.category }}</p>
-
           {% autoescape on %}
-          <p style="font-family: 'Oswald', sans-serif;"> Caption : {{ image.post | safe }}</p>
+          <p style="font-family: 'Oswald', sans-serif;"><strong> Caption :</strong> {{ image.post | safe }}</p>
           {% endautoescape %}
+          <p style="font-family: 'Oswald', sans-serif;"><strong>Category :</strong> {{ image.category }}</p>
+
           <br>
           <hr>
         </div>
     </div>
   </div>
 {% endfor %}
+
 </div>
 <div class="container">
 
