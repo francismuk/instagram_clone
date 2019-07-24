@@ -1,5 +1,5 @@
 from django import forms
-from .models import Image
+from .models import Image, Comments
 
 class SubscribeForm(forms.Form):
     name = forms.CharField(label='First Name', max_length=30)
@@ -13,3 +13,8 @@ class NewPostForm(forms.ModelForm):
             'tags': forms.CheckboxSelectMultiple(),
   
         }
+        
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ('comment',)
