@@ -2,75 +2,77 @@
 {% load static %}
 {% load bootstrap3 %}
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gallery</title>
-    {{ form.media }}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Gallery</title>
+  {{ form.media }}
 </head>
 {% block content %}
 {{block.super}}
 <style>
-.img-fluid{
-  height:480px;
-  width:480px;
-}
+  .img-fluid {
+    height: 480px;
+    width: 480px;
+  }
 </style>
 
-    <div class="container">
+<div class="container">
 
-        <div class="jumbotron text-center mb-0" style="background-color:white;">
+  <!-- <div class="jumbotron text-center mb-0" style="background-color:white;">
       
           <h1 class="h1" style="font-family: 'Satisfy', cursive;color: rgb(245, 39, 108);font-size:70px;">Instagram</h1>
       
+        </div> -->
+</div>
+<div class="container">
+    {% for image in images %}
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-5">
+           <div class="card border-secondary"><a href="{% url 'index' %}">
+            <img src="{{image.image.url}}" data-target="#imageModal{{image.id}}" data-toggle="modal" alt=""
+              class="img-fluid" id="eachimage"></a>
+          <p style="font-family: 'Oswald', sans-serif;">Posted by : {{ image.poster }}</p>
+          <p style="font-family: 'Oswald', sans-serif;">Location : {{ image.location }}</p>
+          <p style="font-family: 'Oswald', sans-serif;">Category : {{ image.category }}</p>
+
+          {% autoescape on %}
+          <p style="font-family: 'Oswald', sans-serif;"> Caption : {{ image.post | safe }}</p>
+          {% endautoescape %}
+          <br>
+          <hr>
         </div>
     </div>
-    <div class="container">
-        {% for image in images %}
-        <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-5">
-        <div class="card border-secondary"><a href="{% url 'index' %}">
-            <img src="{{image.image.url}}" data-target="#imageModal{{image.id}}" data-toggle="modal" alt="" class="img-fluid" id="eachimage"
-              size="100px200"></a>
-              <p style="font-family: 'Oswald', sans-serif;">Posted by : {{ image.poster }}</p>
-              <p style="font-family: 'Oswald', sans-serif;">Location : {{ image.location }}</p>
-              <p style="font-family: 'Oswald', sans-serif;">Category : {{ image.category }}</p>
-
-              {% autoescape on %}
-     <p style="font-family: 'Oswald', sans-serif;"> Caption : {{ image.post | safe }}</p>
-     {% endautoescape %}
-        </div>
-      </div>
-    </div>
-        {% endfor %}
-    <div class="container">
-
-    <form  action="{%url 'index'%}" method="post">
-      {%csrf_token%}
-  
-      {% bootstrap_form letterForm layout='inline' %}
-      <input type="submit" value="Subscribe">
-    </form>
   </div>
-  <footer>
-      <div class="container">
-        <p>&copy; Instagram Clone 2019. All Rights Reserved.</p>
-        <ul class="list-inline">
-          <li class="list-inline-item">
-            <a href="">Privacy</a>
-          </li>
-          <li class="list-inline-item">
-            <a href="">Terms</a>
-          </li>
-          <li class="list-inline-item">
-            <a href="">FAQ</a>
-          </li>
-        </ul>
-      </div>
-    </footer>
+{% endfor %}
+</div>
+<div class="container">
+
+  <form action="{%url 'index'%}" method="post">
+    {%csrf_token%}
+
+    {% bootstrap_form letterForm layout='inline' %}
+    <input type="submit" value="Subscribe">
+  </form>
+</div>
+<footer>
+  <div class="container">
+    <p>&copy; Instagram Clone 2019. All Rights Reserved.</p>
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <a href="">Privacy</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="">Terms</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="">FAQ</a>
+      </li>
+    </ul>
+  </div>
+</footer>
 </div>
 {% endblock %}
