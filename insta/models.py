@@ -31,6 +31,14 @@ class Profile(models.Model):
             return self.following.count()
         else:
             return 0
+        
+    @classmethod
+    def search_users(cls, search_term):
+        profiles = cls.objects.filter(user__username__icontains=search_term)
+        return profiles
+    
+    def __str__(self):
+        return self.user.username
 
 class Category(models.Model):
     photo_category = models.CharField(max_length=50)
@@ -51,6 +59,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.photo_category
+    
+    
+
+
     
 
     
@@ -106,6 +118,21 @@ class Image(models.Model):
         
     def __str__(self):
         return self.name
+    
+class Comments(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='user')
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name="review")
+    comment = models.TextField()
+
+    def save_comment(self):
+        self.save()
+
+    def get_comment(self, id):
+        comments = Comments.objects.filter(image_id =id)
+        return comments
+
+    def __str__(self):
+        return self.comment
     
 class Subscriber(models.Model):
     name = models.CharField(max_length=30)
