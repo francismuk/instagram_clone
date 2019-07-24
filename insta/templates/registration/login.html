@@ -11,7 +11,7 @@
       {% endif %}
       <div class="panel panel-default">
 
-        <div class="panel-heading">
+        <div class="panel-heading" style="background-color: rgb(245, 39, 108);">
           <h3 class="text-center">Sign In</h3>
         </div>
         <div class="panel-body">
@@ -24,9 +24,15 @@
               <input type="submit" class="btn btn-primary btn-sm" value="Login">
             </div>
 
+            <div class="form-group">
+              <p>Dont have an account?</p>
+                <a class='btn btn-danger' href="/accounts/register">Register</a>
+              </div>
+
             <input type="hidden" name="next" value="{{next}}">
 
           </form>
+          
 
         </div>
 
