@@ -4,8 +4,7 @@
 {% block content %}
 
 <div class="jumbotron text-center" style="background-color:white;">
-    <h1 style="font-family: 'Oswald', sans-serif;"> Your Profile Page </h1>
-     <img src="{{profile.profilepic.url}}" class="img-thumbnail" id="eachimage1" style="height:200px;width:150px;"></a>
+     <img src="{{profile.profilepicture.url}}" class="img-thumbnail" id="eachimage1" style="height:200px;width:150px;"></a>
     <p style="font-family: 'Oswald', sans-serif;">{{profile.bio}}</p>
     <button class="btn btn-lg btn-success" style="font-family: 'Oswald', sans-serif;"><a href="#">Edit Profile</a></button>
     </div>
@@ -13,13 +12,14 @@
 <div class="container">
   <div class="card-columns">
     {% for image in images %}
-
+    <div class = 'row'>
+    <div class = 'col-md-4'>
     <div class="card border-secondary"><a href="{% url 'image' image.id %}">
-        <img src="{{image.image.url}}" class="img-fluid" id="eachimage"
+        <img src="{{image.image.url}}" class="img-fluid" style="height: 280px; width: 280px;" id="eachimage"
           size="100px200"></a>
  <p style="font-family: 'Oswald', sans-serif;"> Caption : {{ image.description}}</p>
-      <p style="font-family: 'Oswald', sans-serif;">Posted by : {{ image.user}}</p>
-
+</div>
+</div>
     </div>
     {% endfor %}
   </div>
