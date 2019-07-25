@@ -1,0 +1,10 @@
+.img-fluid {
+    height: 480px;
+    width: 480px;
+}
+.footer{
+    background-image: url(https://www.socialpositives.com/wp-content/uploads/2018/11/instagram-1.jpg);
+    background-size: contain;
+    background-repeat: repeat;
+    
+}
