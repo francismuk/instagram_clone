@@ -8,7 +8,7 @@ class Profile(models.Model):
     class Meta:
         db_table = 'profile'
     bio = models.TextField(max_length=200, null=True, blank=True, default="bio")
-    profilepic = models.ImageField(upload_to='image/', null=True, blank=True)
+    profilepicture = models.ImageField(upload_to='image/', null=True, blank=True)
     user=models.OneToOneField(User, on_delete=models.CASCADE, blank=True, related_name="profile")
     followers = models.ManyToManyField(User, related_name="followers", blank=True)
     following = models.ManyToManyField(User, related_name="following", blank=True)
