@@ -88,3 +88,12 @@ def image(request, id):
         form = CommentForm()
 
     return render(request, 'image.html', {"image": image,'form': form,'comments': comments})
+
+
+@login_required(login_url='/accounts/login/')
+def profile_pages(request, username=None):
+    if not username:
+        username = request.user.username
+    images = Image.objects.filter(poster_id=username)
+
+    return render (request, 'users.html', {'images':images, 'username': username})
