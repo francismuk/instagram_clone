@@ -13,7 +13,7 @@
   {{ form.media }}
   {% block styles %}
     {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/post.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post3.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Satisfy&display=swap" rel="stylesheet">
 
@@ -24,9 +24,12 @@
 
     {% block content %}
     <div class="container">
-    <div class="jumbotron text-center mb-0" style="background-color:white;">  
-        <h1 class="h1" style="font-family: 'Satisfy', cursive;color: rgb(245, 39, 108);font-size:70px;">Instagram</h1>
+    <div class="jumbotron text-center mb-0" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO6GguAPZRydWe_r-vJIxgMkaMYZrSJ3AMoBfAzBdONiZsVSaa); background-repeat:no-repeat; background-size: cover;">  
+        <h1 class="h1" style="font-family: 'Satisfy', cursive;color: rgb(248, 248, 248);font-size:70px;">Instagram</h1>
       </div>
+      <p class="nav-item" style="text-align: center;">
+          <a href="{%url 'new-post'%}"><img style="height:45px; width:45px; " src="media/image/instlogo.png" alt=""><br><small>Post Now</small></a>
+        </p>
       <hr>
     </div>
     
