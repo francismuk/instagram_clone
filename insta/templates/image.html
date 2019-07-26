@@ -19,7 +19,7 @@
     <div class="row">
 
 <div class="col-md-4" style="width:40rem;;">
-    <small class="card-text">{{image.poster}}</small>
+    <small class="card-text"><a href="#">{{image.poster}}</a></small>
     <br>
     <small class="card-text">{{image.location}}</small>
   <img class="card-img-top" src="{{image.image.url}}" alt="Card image cap" class="img-fluid">
@@ -53,7 +53,7 @@
        {% for comment in comments %}
        <div style="color: black;">
        <p>
-        {{ comment.user }} : <small> {{ comment.comment }} </small></p>
+        <a href="#"> {{ comment.user }}</a> : <small> {{ comment.comment }} </small></p>
       </p>
       </div>
        {% endfor%}
