@@ -7,17 +7,7 @@
             <img src="{{username.profile.profilepic.url}}" width="152" height="152" class="rounded-circle border userimage">
         </div>
         <div class="col-sm-8">
-            <div style="margin-bottom: 20px;">
-                <h3 style="vertical-align: middle">{{username.username}}</h3>
-                <a href="{%  url 'edit' %}">
-                    <button class="editbtn">
-                        <span class="edittext">Edit Profile</span>
-                    </button>
-                </a>
-                <button style="display: contents" data-toggle="modal" data-target="#logoutmodal">
-                    <span class="instaglyph settings"></span>
-                </button>
-            </div>
+            
             <div style="margin-bottom: 11px;">
                 <span class="info"><strong>{{ username.profile.image.count }}</strong> posts</span>
 
