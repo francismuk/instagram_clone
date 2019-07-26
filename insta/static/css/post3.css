@@ -1,0 +1,13 @@
+.img-fluid {
+    height: 480px;
+    width: 480px;
+}
+.footer{
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO6GguAPZRydWe_r-vJIxgMkaMYZrSJ3AMoBfAzBdONiZsVSaa);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.card-img-top{
+    max-width: 350px;
+    max-height: 500px;
+}
