@@ -1,66 +1,69 @@
 {%extends 'base.html'%}
 {% load static %}
 {% load bootstrap3 %}
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Gallery</title>
+  {{ form.media }}
+</head>
 {% block content %}
 {{block.super}}
-<style>
-.img-fluid {
-    height: 480px;
-    width: 480px;
-}
-</style>
+
 
 
 <div class="container">
-<div class="card mb-3" style="width:40rem;;">
-  <img class="card-img-top" src="{{image.image.url}}" alt="Card image cap" class="img-fluid" size="100px200">
-  <div class="card-body">
-    <button class="btn btn-lg btn-danger">Like This Image</button>
+    <div class="row">
 
-    <a href="#" onClick="document.getElementById('likebutton').submit()">Like This Post</a> {{image.likes}}
+<div class="col-md-4" style="width:40rem;;">
+    <small class="card-text">{{image.poster}}</small>
+    <br>
+    <small class="card-text">{{image.location}}</small>
+  <img class="card-img-top" src="{{image.image.url}}" alt="Card image cap" class="img-fluid">
 
-<form id="likebutton" method="POST" action="/posts/{{image.id}}/preference/1/">
+</div>
+
+<div class="col-md-3">
+<form id="like" method="POST" action="/posts/{{image.id}}/preference/1/">
 {% csrf_token %}
 <input type="hidden">
 </form>
-    <h5 class="card-title" style="font-family: 'Oswald', sans-serif;"><strong>Name Of Image:</strong>
-      <br>
-      {{image.name}}</h5>
-    <p class="card-text" style="font-family: 'Oswald', sans-serif;"><strong>Location:</strong>
-      <br>
-      {{image.location}}</p>
+    
+      <button class="btn btn-sm btn-success">Like</button>
+      <button class="btn btn-sm btn-danger">Dislike</button>
+      {% autoescape on %}
     <p class="card-text" style="font-family: 'Oswald', sans-serif;"><strong>Caption:</strong>
+      {% endautoescape %}
       <br>
-      {{image.description}}</p>
+      {{image.post | safe}}</p>
     <p class="card-text" style="font-family: 'Oswald', sans-serif;"><small class="text-muted">Posted by {{image.user}}</small></p>
-  </div>
 
   <div class="card border-secondary">
      <div class="card-header">
-     <h5 style="font-family: 'Oswald', sans-serif;">Image Comments</h5>
+     <h5 style="font-family: 'Oswald', sans-serif;"> <strong> Image Comments </strong></h5>
+     <hr>
        </div>
 
 
-     <div class="card-body text-primary">
-
-
-     <p style="font-family: 'Oswald', sans-serif;">{{image.comments}}</p>
-
+     <div class="card-body text-primary" style="float: left; width:270px; height:260px; overflow: scroll;">
 
        {% for comment in comments %}
-
-       <p style="font-family: 'Oswald', sans-serif;"> {{ comment }}</p>
-
+       <div style="color: black;">
+       <p>
+        {{ comment.user }} : <small> {{ comment.comment }} </small></p>
+      </p>
+      </div>
        {% endfor%}
 
      </div>
    </div>
 </div>
-</div>
 
 
-
-<div class="container mt-2 mx-auto p-5" style="background-color:#ffffff; border: 1px solid #e6e6e6;">
+<div class="col-md-4">
   <h3 style="font-family: 'Oswald', sans-serif;">Add your comment</h3>
   <hr>
   <form action=""  method="post">
@@ -68,6 +71,8 @@
       <input type="submit" class="btn btn-primary" value="Post">
   </form>
   <hr>
+</div>
+</div>
 </div>
 
 {% endblock %}
