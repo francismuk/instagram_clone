@@ -53,7 +53,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 # SECRET_KEY = 'cde-ecx_4#-5^iuo=s1$1@d99rz9n+(rv!6wv%p1gd78!4@v30'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -147,14 +147,14 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'inst',
-#         'USER': 'francis',
-#         'PASSWORD':'1234',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'inst',
+        'USER': 'francis',
+        'PASSWORD':'1234',
+    }
+}
 
 TIME_ZONE = 'Africa/Nairobi'
 
