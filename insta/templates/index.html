@@ -25,16 +25,16 @@
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-5">
-          <p style="font-family: 'Oswald', sans-serif;"> <strong> Posted by : </strong> <a href="{% url 'users_page' user.id %}"><strong>{{ image.poster}}</strong></a></p>
-          <p style="font-family: 'Oswald', sans-serif;">{{ image.location }}</p>
+          <p><strong> Posted by : </strong> <a href="{% url 'users_page' user.id %}"><strong>{{ image.poster}}</strong></a></p>
+          <p>{{ image.location }}</p>
 
            <div class="card border-secondary"><a href="{% url 'image' image.id %}">
             <img src="{{image.image.url}}" data-target="#imageModal{{image.id}}" data-toggle="modal" alt=""
               class="img-fluid" id="eachimage"></a>
           {% autoescape on %}
-          <p style="font-family: 'Oswald', sans-serif;"><strong> Caption :</strong> {{ image.post | safe }}</p>
+          <p><strong> Caption :</strong> {{ image.post | safe }}</p>
           {% endautoescape %}
-          <p style="font-family: 'Oswald', sans-serif;"><strong>Category :</strong> {{ image.category }}</p>
+          <p><strong>Category :</strong> {{ image.category }}</p>
 
           <br>
           <hr>
