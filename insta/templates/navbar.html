@@ -38,19 +38,27 @@
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right navbar-nav mr-auto">
           <li class="nav-item">
-            <a href="{%url 'new-post'%}">New Post<img style="height:25px; width:25px; " src="media/image/instlogo.png" alt=""></a>
+            <a href="{%url 'new-post'%}">New Post<img style="height:25px; width:25px; " src="media/image/instlogo.png"
+                alt=""></a>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
-              <form class="form-inline my-2 my-lg-0" style="padding-top: 7px" >
-                  <div class="input-group">
-                    <p>
+            <form class="form-inline my-2 my-lg-0" style="padding-top: 7px">
+              <div class="input-group">
+                <form class="form-inline" role="search" action="{% url 'search' %}">
+                  <p>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">@</button>
+                    <input class="form-control my-2 my-sm-0 search-input" name="search" type="search"
+                      placeholder="Search a User" aria-label="Search">
+                  </p>
+                </form>
+                <!-- <p>
                       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">@</button>
                       <input class="form-control mr-sm-2" type="search" placeholder="Username" aria-label="Search">
-                    </p>
-                  </div>
-                </form>          
-              </li>
+                    </p> -->
+              </div>
+            </form>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
@@ -63,9 +71,9 @@
               <p><a class="dropdown-item" href="/logout">Logout</a></p>
             </div>
           </li>
-          
+
         </ul>
-        
+
         {% else %}
         <li>
           <a class='btn btn-danger' href="/accounts/login">Login</a>
