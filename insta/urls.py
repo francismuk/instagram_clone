@@ -12,7 +12,6 @@ urlpatterns=[
     url(r'^mainprofile/$', views.mainprofile, name='mainprofile'),
     url(r'^edit/profile$', views.edit_user, name='edit_user'),
 
-
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
