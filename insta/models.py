@@ -39,6 +39,11 @@ class Profile(models.Model):
         profiles = cls.objects.filter(user__username__icontains=search_term)
         return profiles
     
+    @classmethod
+    def filter_by_id(cls, id):
+        profile = Profile.objects.filter(user = id).first()
+        return profile
+    
     def __str__(self):
         return self.user.username
 
@@ -108,6 +113,11 @@ class Image(models.Model):
     def get_image_by_id(cls,id):
         my_image = Image.objects.get(id=id)
         return my_image
+    
+    @classmethod
+    def get_profile_images(cls, profile):
+        images = Image.objects.filter(profile__pk = profile)
+        return images
     
     @classmethod
     def search_image(cls,search_category):
