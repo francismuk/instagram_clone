@@ -93,4 +93,5 @@ Like and Follow functionality do not work
 Contact me on mukd3v3lop3r@gmail.com for any comments, reviews or advice.
 
 ### License
-Copyright (c) **FRANCIS MUKUHA**
+[MIT](./License)
+Copyright (c) 2019 **FRANCIS MUKUHA**
