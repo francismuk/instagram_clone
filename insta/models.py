@@ -10,8 +10,6 @@ class Profile(models.Model):
     bio = models.TextField(max_length=200, null=True, blank=True, default="bio")
     profilepicture = models.ImageField(upload_to='image/', null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, related_name="profile")
-    followers = models.ManyToManyField(User, related_name="followers", blank=True)
-    following = models.ManyToManyField(User, related_name="following", blank=True)
     
     def save_profile(self):
         self.save()
@@ -19,26 +17,16 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
         
-    def is_following(self, checkuser):
-        return checkuser in self.following.all()
-
-    def followers_number(self):
-        if self.followers.count():
-            return self.followers.count()
-        else:
-            return 0
-
-    def following_number(self):
-        if self.following.count():
-            return self.following.count()
-        else:
-            return 0
-        
     @classmethod
-    def search_users(cls, search_term):
-        profiles = cls.objects.filter(user__username__icontains=search_term)
+    def search_profile(cls, name):
+        profiles = cls.objects.filter(user__username__icontains=name)
         return profiles
     
+    @classmethod
+    def get_by_id(cls, id):
+        profile = Profile.objects.get(user = id).first()
+        return profile
+
     @classmethod
     def filter_by_id(cls, id):
         profile = Profile.objects.filter(user = id).first()
@@ -86,6 +74,8 @@ class Location(models.Model):
 
 from tinymce.models import HTMLField
 class Image(models.Model):
+    class Meta:
+        ordering = ('-post_date',)
     image = models.ImageField(upload_to = 'image/',)
     name = models.CharField(max_length=60)
     post = HTMLField()
@@ -110,19 +100,15 @@ class Image(models.Model):
         return all_images
         
     @classmethod
-    def get_image_by_id(cls,id):
-        my_image = Image.objects.get(id=id)
-        return my_image
+    def get_image_id(cls, id):
+        image = Image.objects.get(pk=id)
+        return image
     
     @classmethod
     def get_profile_images(cls, profile):
         images = Image.objects.filter(profile__pk = profile)
         return images
     
-    @classmethod
-    def search_image(cls,search_category):
-        images_category = Image.objects.filter(search_category=search_category)
-        return images_category
 
     @classmethod
     def filter_by_category(cls, filter_category):
