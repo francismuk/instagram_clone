@@ -112,3 +112,51 @@ def edit_user(request):
     else:
         form = UpdatebioForm()
     return render(request, 'registration/edit_profile.html', {"form": form})
+
+@login_required(login_url='/accounts/login/')
+def mainprofile(request, username = None):
+
+    if not username:
+        username = request.user.username
+    images = Image.objects.filter(user_id=username)
+
+    return render(request, 'main_profile.html', locals())
+
+@login_required(login_url='/accounts/login/')
+def users_page(request, username):
+    if not username:
+        username = request.user.username
+    images = Image.objects.filter(poster_id=username)
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    users = User.objects.get(pk=username)
+    if users:
+        profile = Profile.objects.get(user=users)
+    else:
+        print('NIL')
+
+
+    return render (request, 'users2.html', {'images':images,'profile':profile,'user':user,'username': username})
+
+def search(request):
+    if 'search' in request.GET and request.GET['search']:
+        search_term = request.GET.get('search')
+        profiles = Profile.search_users(search_term)
+        message = f'{search_term}'
+        
+        return render(request, 'search.html',{'message':message, 'profiles':profiles})
+
+
+    else:
+        message = 'Enter term to search'
+        return render(request, 'search.html', {'message':message})
+    
+def profile(request, username):
+    profile = User.objects.get(user=username)
+    try:
+        profile_details = Profile.get_by_id(user.id)
+    except:
+        profile_details = Profile.filter_by_id(profile.id)
+    images = Image.get_profile_images(profile)
+    
+    return render(request, 'users2.html', { 'profile':profile, 'profile_details':profile_details, 'images':images})
