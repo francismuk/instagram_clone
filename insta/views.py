@@ -138,25 +138,24 @@ def users_page(request, username):
 
     return render (request, 'users2.html', {'images':images,'profile':profile,'user':user,'username': username})
 
+@login_required(login_url='/accounts/login/')
 def search(request):
     if 'search' in request.GET and request.GET['search']:
         search_term = request.GET.get('search')
-        profiles = Profile.search_users(search_term)
+        profiles = Profile.search_profile(search_term)
         message = f'{search_term}'
         
         return render(request, 'search.html',{'message':message, 'profiles':profiles})
-
-
     else:
         message = 'Enter term to search'
         return render(request, 'search.html', {'message':message})
     
 def profile(request, username):
-    profile = User.objects.get(user=username)
+    profile = User.objects.get(username=username)
     try:
-        profile_details = Profile.get_by_id(user.id)
+        profile_details = Profile.get_by_id(profile.id)
     except:
         profile_details = Profile.filter_by_id(profile.id)
-    images = Image.get_profile_images(profile)
+    images = Image.get_profile_images(profile.id)
     
     return render(request, 'users2.html', { 'profile':profile, 'profile_details':profile_details, 'images':images})
